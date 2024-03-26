@@ -1,0 +1,45 @@
+{% extends "layout.html" %} {% block body %}
+<style>
+  .red {
+    color: red;
+  }
+
+  .blue {
+    color: blue;
+  }
+</style>
+<div x-data="dropdown">
+  <button @click="toggle">expand</button>
+  <button @click="changeColor">change content</button>
+  <div x-show="open" x-bind:class="! color ? 'red' : 'blue'">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
+    ducimus, beatae magnam esse quasi atque doloremque saepe quo omnis
+    architecto, velit quam laborum cupiditate repudiandae. Quia, quod
+    laudantium. Omnis, error.
+  </div>
+  <span x-text="color"></span>
+</div>
+<div class="card">
+  <h1>{{posts.title}}</h1>
+  <h5>{{posts.created_at}}</h5>
+  <p>{{posts.body}}</p>
+</div>
+
+<script>
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("dropdown", () => ({
+      open: false,
+      color: false,
+
+      toggle() {
+        this.open = !this.open;
+      },
+
+      changeColor() {
+        this.color = !this.color;
+      },
+    }));
+  });
+</script>
+
+{% endblock %}
